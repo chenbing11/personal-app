@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:personal_app/pages/custom-picker-page.dart';
 import 'package:personal_app/pages/json-picker-page.dart';
+import 'package:personal_app/pages/count-down-page.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -79,7 +80,11 @@ class _HomePageState extends State<HomePage> {
           RaisedButton(
             padding: EdgeInsets.all(0),
             onPressed: () {
-
+              Navigator.push(context,
+                  new MaterialPageRoute(
+                      builder: (context) => new CountDownPage()
+                  )
+              ).then((value) => null);
             },
             child: Row(
               children: [

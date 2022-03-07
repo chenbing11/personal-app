@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:personal_app/pages/custom-picker-page.dart';
 import 'package:personal_app/pages/json-picker-page.dart';
 import 'package:personal_app/pages/count-down-page.dart';
+import 'package:personal_app/pages/join-team-page.dart';
+import 'package:personal_app/pages/team-list-page.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -89,6 +91,36 @@ class _HomePageState extends State<HomePage> {
             child: Row(
               children: [
                 Text('倒计时弹窗'),
+              ],
+            ),
+          ),
+          RaisedButton(
+            padding: EdgeInsets.all(0),
+            onPressed: () {
+              Navigator.push(context,
+                  new MaterialPageRoute(
+                      builder: (context) => new JoinTeamPage()
+                  )
+              ).then((value) => null);
+            },
+            child: Row(
+              children: [
+                Text('列表页'),
+              ],
+            ),
+          ),
+          RaisedButton(
+            padding: EdgeInsets.all(0),
+            onPressed: () {
+              Navigator.push(context,
+                  new MaterialPageRoute(
+                      builder: (context) => new TeamListPage()
+                  )
+              ).then((value) => null);
+            },
+            child: Row(
+              children: [
+                Text('企业列表页'),
               ],
             ),
           ),

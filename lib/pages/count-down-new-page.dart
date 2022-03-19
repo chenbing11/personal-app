@@ -5,19 +5,17 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 
 
-
-
-class CountDownPage extends StatefulWidget {
+class CountDownNewPage extends StatefulWidget {
 
   @override
-  _CountDownPageState createState() => _CountDownPageState();
+  _CountDownNewPageState createState() => _CountDownNewPageState();
 }
 
-class _CountDownPageState extends State<CountDownPage> {
+class _CountDownNewPageState extends State<CountDownNewPage> {
   StreamController<String> controller =StreamController();
-  String data = '';
-  dynamic _timer = null;
-  // String timerNumer = '3';
+  String data = ''; //实时显示的值
+  dynamic _timer = null;//定义一个计时器
+  int timerNumer = 3; //倒计时总数（单位为秒）
 
   @override
   void initState() {
@@ -29,7 +27,7 @@ class _CountDownPageState extends State<CountDownPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("自定义数据选择器"),
+        title: Text("倒计时"),
       ),
       body: Center(
         child: GestureDetector(
@@ -52,7 +50,11 @@ class _CountDownPageState extends State<CountDownPage> {
                     ],
                   ),
                 ),
-                Text(data),
+                Text(
+                  data,
+                  style: TextStyle(fontSize: 28),
+                  textAlign: TextAlign.center,
+                ),
                 Container(
                   height: 18.0,
                 ),
@@ -66,26 +68,25 @@ class _CountDownPageState extends State<CountDownPage> {
   //登录成功倒计时弹窗
   void buildRedisterSuccDialog(BuildContext context) {
     setState(() {
-      //第三部：流中添加元素
-      controller.add(data = '3');
+      controller.add(data = timerNumer.toString());// 流中添加元素
     });
+    // controller.add(data = timerNumer.toString());// 流中添加元素
     startCountDown(
-      3,
+      timerNumer,
       (value) {
         setState(() {
           controller.add(data = value);
         });
+
       },
       () { //定时器结束
         setState(() {
-          controller.add(data = '0');
+         controller.add(data = '0');
         });
         Navigator.of(context).pop(true); //关闭对话框
-
       }
     );//倒计时
 
-    // 这里有坑，必须是 StreamBuilder 数据流的形式，直接设置setState 数据不行
     showCupertinoDialog(
       context: context,
       builder: (BuildContext context) {
@@ -105,12 +106,6 @@ class _CountDownPageState extends State<CountDownPage> {
                         textAlign: TextAlign.center
                     ),
                     SizedBox(height:4.0),
-                    Text(
-                        '倒计时文本2',
-                        style: TextStyle(fontSize: 10.0,
-                            color: Color(0xff315efb)),
-                        textAlign: TextAlign.center
-                    ),
                   ]
               )
           ),
@@ -121,7 +116,7 @@ class _CountDownPageState extends State<CountDownPage> {
                     initialData: '',
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       return FlatButton(
-                          child: Text("开始使用（${snapshot.data}）" , style: TextStyle(
+                          child: Text("倒计时（${snapshot.data}）" , style: TextStyle(
                             fontSize: 20.0,
                             color: Color(0xff315efb),
                           ),),
@@ -138,51 +133,16 @@ class _CountDownPageState extends State<CountDownPage> {
         );
       },
     );
-
-    // CupertinoAlertDialog(
-    //   title: Text(
-    //     '倒计时',
-    //     style: TextStyle(fontWeight: FontWeight.bold, ),
-    //   ),
-    //   content:  Container(
-    //     child: Column(
-    //       children:[
-    //         SizedBox(height:12.h),
-    //         Text(
-    //           '倒计时文本1',
-    //           style: TextStyle(fontSize: 10.0,
-    //             color: Color(0xff333333)),
-    //           textAlign: TextAlign.center
-    //         ),
-    //         SizedBox(height:4.h),
-    //         Text(
-    //           '倒计时文本2',
-    //           style: TextStyle(fontSize: 10.0,
-    //             color: Color(0xff315efb)),
-    //           textAlign: TextAlign.center
-    //         ),
-    //       ]
-    //     )
-    //   ),
-    //   actions: <Widget>[
-    //     FlatButton(
-    //       child: Text( timerNumer, style: TextStyle(
-    //             fontSize: 20.sp,
-    //             color: Color(0xff315efb),
-    //           ),),
-    //       onPressed: () async {
-    //         Navigator.of(context).pop(true); //关闭对话框
-    //         clearTimer();//清除定时器
-    //         // to do
-    //       }
-    //     ),
-    //   ],
-    // );
-    //   },
-    // );
   }
 
-  //倒计时方法
+
+
+  /**
+    * 倒计时方法，
+    * setValueFun 每间隔一秒执行回调重置值；
+    * callBackFun定时器结束是的回调函数
+  */
+
   void startCountDown(int time, Function setValueFun, Function callBackFun) {
     // 重新计时的时候要把之前的清除掉
     clearTimer();
@@ -195,7 +155,7 @@ class _CountDownPageState extends State<CountDownPage> {
       if (countTime <= 0) {
         clearTimer();
         //倒计时结束，可以在这里做相应的操
-        callBackFun();
+        callBackFun(); //定时器结束时的回调函数
         return;
       }
       countTime--;
@@ -239,6 +199,7 @@ class _CountDownPageState extends State<CountDownPage> {
     }
   }
 
+  // 重设置 数据流
   void setStream () {
     data = '';
     //第一步：构造数据数据的控制器，用于往流中添加数据

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:personal_app/pages/custom-picker-page.dart';
 import 'package:personal_app/pages/json-picker-page.dart';
-import 'package:personal_app/pages/count-down-page.dart';
+import 'package:personal_app/pages/count-down-old-page.dart';
+import 'package:personal_app/pages/count-down-new-page.dart';
 import 'package:personal_app/pages/join-team-page.dart';
 import 'package:personal_app/pages/team-list-page.dart';
 
@@ -84,13 +85,28 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               Navigator.push(context,
                   new MaterialPageRoute(
-                      builder: (context) => new CountDownPage()
+                      builder: (context) => new CountDownOldPage()
                   )
               ).then((value) => null);
             },
             child: Row(
               children: [
-                Text('倒计时弹窗'),
+                Text('倒计时弹窗-初始'),
+              ],
+            ),
+          ),
+          RaisedButton(
+            padding: EdgeInsets.all(0),
+            onPressed: () {
+              Navigator.push(context,
+                  new MaterialPageRoute(
+                      builder: (context) => new CountDownNewPage()
+                  )
+              ).then((value) => null);
+            },
+            child: Row(
+              children: [
+                Text('倒计时弹窗-改良'),
               ],
             ),
           ),

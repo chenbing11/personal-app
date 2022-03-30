@@ -3,9 +3,8 @@ import 'package:personal_app/pages/custom-picker-page.dart';
 import 'package:personal_app/pages/json-picker-page.dart';
 import 'package:personal_app/pages/count-down-old-page.dart';
 import 'package:personal_app/pages/count-down-new-page.dart';
-import 'package:personal_app/pages/join-team-page.dart';
 import 'package:personal_app/pages/team-list-page.dart';
-
+import 'package:personal_app/pages/ali-captcha_page.dart';
 
 class HomePage extends StatefulWidget {
   // HomePage({Key key, this.title}) : super(key: key);
@@ -115,21 +114,6 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               Navigator.push(context,
                   new MaterialPageRoute(
-                      builder: (context) => new JoinTeamPage()
-                  )
-              ).then((value) => null);
-            },
-            child: Row(
-              children: [
-                Text('列表页'),
-              ],
-            ),
-          ),
-          RaisedButton(
-            padding: EdgeInsets.all(0),
-            onPressed: () {
-              Navigator.push(context,
-                  new MaterialPageRoute(
                       builder: (context) => new TeamListPage()
                   )
               ).then((value) => null);
@@ -140,7 +124,21 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-
+          RaisedButton(
+            padding: EdgeInsets.all(0),
+            onPressed: () {
+              Navigator.push(context,
+                  new MaterialPageRoute(
+                      builder: (context) => new AliCaptchaPage()
+                  )
+              ).then((value) => null);
+            },
+            child: Row(
+              children: [
+                Text('阿里云人机校验'),
+              ],
+            ),
+          ),
         ]
       ),
       )

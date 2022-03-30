@@ -62,6 +62,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_aliyun_captcha:
+    dependency: "direct main"
+    description:
+      name: flutter_aliyun_captcha
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.4"
   flutter_custom_dialog:
     dependency: "direct main"
     description:
@@ -158,4 +165,4 @@ packages:
     version: "2.1.0"
 sdks:
   dart: ">=2.12.0 <3.0.0"
-  flutter: ">=1.10.0"
+  flutter: ">=1.20.0"
